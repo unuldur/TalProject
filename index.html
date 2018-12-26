@@ -1,0 +1,56 @@
+<!DOCTYPE html >
+<html lang="en">
+<link href="style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="litetalk.code.js"> </script>   <!-- first:  litetalk code        -->
+<script type="text/javascript" src="fifi.code.js">  </script>
+<script type="text/javascript" src="logic.js">  </script>
+<head>
+    <meta charset="utf-8">
+    <title>Mania</title>
+</head>
+<body>
+<div id="game">
+    <pre>
+##################################################################################################
+#      __    __     _                            _                                _              #
+#     / / /\ \ \___| | ___ ___  _ __ ___   ___  | |_ ___    _ __ ___   __ _ _ __ (_) __ _        #
+#     \ \/  \/ / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \  | '_ ` _ \ / _` | '_ \| |/ _` |       #
+#      \  /\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | | | | | | (_| | | | | | (_| |       #
+#       \/  \/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/  |_| |_| |_|\__,_|_| |_|_|\__,_|       #
+#                                                                                                #
+##################################################################################################
+    </pre>
+    <p id="test"></p>
+    <textarea id="chatbox" readonly>
+    </textarea>
+    <textarea id="fifiballoon" hidden="True"></textarea>
+    <p id="form">
+        >
+        <input id="litetalkchatbox" type="text" size="55" value="ask name"  onKeyPress="keyPressed(event);"/>
+        <input type="submit" name="sendButton" id="sendButton" value="SEND" onClick="sendMessageFifi()"/>
+    </p>
+</div>
+</body>
+
+<script type="text/javascript">
+    BOT_theInterface 	= "STANDARD";
+    BOT_traceFlag		= false;
+    BOT_statusFlag		= true;
+    FIFI_counterLoop(); 											// launches counter process (but does't count)
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

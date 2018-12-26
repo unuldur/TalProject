@@ -1,0 +1,58 @@
+body{
+    background-color: gray;
+    text-align: center;
+}
+#game{
+    border: 4px ridge darkgreen;
+    background-color: black;
+    color: green;
+    height: 500px;
+    width: 800px;
+    margin-left: 200px;
+}
+
+#sendButton{
+    background-color: black;
+    border-color: darkgreen;
+    color: green;
+}
+#chatbox{
+    height: 250px;
+    width: 700px;
+    border: none;
+    border-left: 2px solid green;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: black;
+    color: green;
+    resize: none;
+    overflow: auto;
+
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,255,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,255,0,0.5);
+}
+
+#litetalkchatbox{
+
+    background-color: black;
+    color: green;
+    border: none;
+}
+
+#form{
+    text-align: left;
+    padding-left: 50px;
+}
