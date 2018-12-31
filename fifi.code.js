@@ -37,6 +37,12 @@ SPECIFIC TAGS:	WHY, EFFECT, REVERSE, UNDO
 //                       MODEL TOPICS DESCRIPTION
 // ====================================================================
 
+// Variables list
+var gateau = true v chbjuioà)p;
+var nbSpeakGour = 0;
+var bouteille = false;
+
+var glutonyCake = false;
 
 // ======================  TOPIC CYRIL  ======================
 var fifiTopic = [
@@ -91,6 +97,58 @@ var fifiTopic = [
 								["HOW","You must type a valid javascript expression"],
 								["EFFECT","compute the expression"]
 								]
+];
+
+function gourmandisePrint(val) {
+    var e = document.getElementById("gourmandiseballoon");
+    if(e) { e.value = val; }
+}
+
+function func_giveCakeGourmandise(){
+    if(gateau){
+        gateau = false;
+        glutonyCake = true;
+        gourmandisePrint("Merci! MniamMniamMniam....... Maintenant j'ai encore faim...*Il se met à pleurer*")
+        return true;
+    }
+    gourmandisePrint("Mechant, t'as pas mon gateau !")
+    return false
+}
+
+var gourmandiseTopic = [
+    [["KEY", "_class"],						["VAL", "bot"], ["BOT","gourmandiseBot"]],
+    [["KEY", "_reference"],					["VAL", ["g","gourmandise"]]],
+    [["KEY", "_htmlprefix"],				["VAL", "gourmandise"]], //prefix of HTML elements
+    [["KEY", "_read"],						["VAL", ["userTopic","daisiTopic","counterTopic"]]],
+    [["KEY", "_write"],						["VAL", ["userTopic","counterTopic"]]],
+    [["KEY", "_exec"],						["VAL", ["userTopic","counterTopic"]]],
+    [["KEY", "nom"],						["VAL", "Gourmandise"],
+        ["ONASK", "Je m'appele Gourmandise, et j'ai faim !"],
+        ["WHY","Parce que j'ai toujours très faim."]
+    ],
+    [["KEY", ["faim", "manger"]],
+        ["VAL", "Manger"],
+        ["ONASK", "C'est quand mon ventre il fait Grrrrrrr....GRRRRRRRR !!!"],
+        ["WHY", "C'est Jalousie elle m'a pris mon gâteau, et du coup j'ai faim, et je suis triste."]],
+
+    [["KEY", "age"],						["VAL", 42], ["TYPE","INT"],
+                                            ["ONASK", "J'ai 42 ans !!!"]],
+    [["KEY", "*"],                         ["ONASK", "Plop"]],
+    [["KEY", ["gateau", "gâteau"]],        ["CAT", "ACT"], ["VAL", "func_giveCakeGourmandise"]
+                                                ],
+    // FEELINGS
+    [["KEY", "happiness"],		["VAL", 0.8], ["CAT","VAR"], ["TYPE","INT"]], // 7 standard feelings iniitated
+    [["KEY", "confidence"],		["VAL", -0.8], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "irritability"],	["VAL", 0.8], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "satisfaction"],	["VAL", -0.8], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "respect"],		["VAL", -0.8], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "force"],			["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "excitement"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    // PREFS
+    [["KEY", "preference"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printPreferenceList]],
+    [["KEY", "distaste"],		["VAL", []],  ["CAT","VAR"],["ONASK",BOT_printDistasteList]],
+    [["KEY", "suggestion"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printSuggestionList]],
+    [["KEY", "intention"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printIntentionList]],
 ];
 
 
@@ -247,10 +305,12 @@ var counterTopic = [
 // =========  Initialization of bots and declaration of topics  ==========
 var fifiBot    = new BOT_makeBot("fifiBot","fifiTopic");
 var daisieBot  = new BOT_makeBot("daisieBot","daisieTopic");
+var gourmandiseBot  = new BOT_makeBot("gourmandiseBot","gourmandiseTopic");
+
 BOT_declareTopics(["userTopic","counterTopic"]);
 
-BOT_theBotId		= "fifiBot";		// sets current bot id 
-BOT_theTopicId		= "fifiTopic";		// sets current topic id
+BOT_theBotId		= "gourmandiseBot";		// sets current bot id
+BOT_theTopicId		= "gourmandiseTopic";		// sets current topic id
 BOT_theUserTopicId	= "userTopic";		// sets topic of current user id
 
  

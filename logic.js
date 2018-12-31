@@ -1,13 +1,13 @@
 
 
 
-function sendMessageFifi(){
+function sendMessageGourmandise(){
     BOT_chatboxOnSend('litetalkchatbox');
-    var fifiballon = document.getElementById("fifiballoon");
+    var fifiballon = document.getElementById("gourmandiseballoon");
     var chat = document.getElementById("litetalkchatbox");
     var chatbox = document.getElementById("chatbox");
     chatbox.value += "Tom > " + chat.value + "\n";
-    chatbox.value += "Fifi > " + fifiballon.value + "\n";
+    chatbox.value += "Gourmandise > " + fifiballon.value + "\n";
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
