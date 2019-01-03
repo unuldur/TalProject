@@ -24,10 +24,12 @@
     <textarea id="chatbox" readonly>
     </textarea>
     <textarea id="gourmandiseballoon" hidden="True"></textarea>
+    <textarea id="colereballoon" hidden="True"></textarea>
+    <textarea id="jalousieballoon" hidden="True"></textarea>
     <p id="form">
         >
         <input id="litetalkchatbox" type="text" size="55" value="ask name"  onKeyPress="keyPressed(event);"/>
-        <input type="submit" name="sendButton" id="sendButton" value="SEND" onClick="sendMessageGourmandise()"/>
+        <input type="submit" name="sendButton" id="sendButton" value="SEND" onClick="sendMessage(BOT_theBotId, BOT_theBotId)"/>
     </p>
 </div>
 </body>
@@ -37,6 +39,7 @@
     BOT_traceFlag		= false;
     BOT_statusFlag		= true;
     FIFI_counterLoop(); 											// launches counter process (but does't count)
+    BOT_onSwitchBot("", "gourmandise");
 </script>
 
 </html>

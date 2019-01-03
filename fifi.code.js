@@ -38,11 +38,15 @@ SPECIFIC TAGS:	WHY, EFFECT, REVERSE, UNDO
 // ====================================================================
 
 // Variables list
-var gateau = true v chbjuioà)p;
+var gateau = true;
 var nbSpeakGour = 0;
 var bouteille = false;
 
 var glutonyCake = false;
+var visiteColereFirst = false;
+var canSpeakToColere = false;
+var knowJalousie = false;
+var knowColere = false;
 
 // ======================  TOPIC CYRIL  ======================
 var fifiTopic = [
@@ -119,29 +123,36 @@ var gourmandiseTopic = [
     [["KEY", "_class"],						["VAL", "bot"], ["BOT","gourmandiseBot"]],
     [["KEY", "_reference"],					["VAL", ["g","gourmandise"]]],
     [["KEY", "_htmlprefix"],				["VAL", "gourmandise"]], //prefix of HTML elements
-    [["KEY", "_read"],						["VAL", ["userTopic","daisiTopic","counterTopic"]]],
+    [["KEY", "_read"],						["VAL", ["userTopic","jalousieTopic", "colereTopic", "counterTopic"]]],
     [["KEY", "_write"],						["VAL", ["userTopic","counterTopic"]]],
     [["KEY", "_exec"],						["VAL", ["userTopic","counterTopic"]]],
     [["KEY", "nom"],						["VAL", "Gourmandise"],
-        ["ONASK", "Je m'appele Gourmandise, et j'ai faim !"],
+        ["ONASK", "Je m'appele Gourmandise, et j'ai faim"],
         ["WHY","Parce que j'ai toujours très faim."]
     ],
     [["KEY", ["faim", "manger"]],
         ["VAL", "Manger"],
-        ["ONASK", "C'est quand mon ventre il fait Grrrrrrr....GRRRRRRRR !!!"],
-        ["WHY", "C'est Jalousie elle m'a pris mon gâteau, et du coup j'ai faim, et je suis triste."]],
-
+        ["ONASK",function (){
+			knowJalousie = true;
+			return "C'est Jalousie elle m'a pris mon gâteau, et du coup j'ai faim, et du coup je pleure, et du coup je me fait gronder.";
+		}]],
+	[["KEY", ["gronder"]],
+		["ONASK",function (){
+			knowColere = true;
+			return "Oui, Colere il aime pas quand je pleure et me crie dessus mais du coup je pleure encore plus...";
+		}]],
     [["KEY", "age"],						["VAL", 42], ["TYPE","INT"],
                                             ["ONASK", "J'ai 42 ans !!!"]],
-    [["KEY", "*"],                         ["ONASK", "Plop"]],
-    [["KEY", ["gateau", "gâteau"]],        ["CAT", "ACT"], ["VAL", "func_giveCakeGourmandise"]
-                                                ],
+    [["KEY", ["gateau", "gâteau"]],        ["CAT", "ACT"], ["VAL", "func_giveCakeGourmandise"]],
+    // RELATIONS
+    [["KEY", "jalousie"],			["VAL", "jalousieTopic"],["CAT","REL"]],
+    [["KEY", "colere"],			["VAL", "colereTopic"],["CAT","REL"]],
     // FEELINGS
-    [["KEY", "happiness"],		["VAL", 0.8], ["CAT","VAR"], ["TYPE","INT"]], // 7 standard feelings iniitated
+    [["KEY", "happiness"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]], // 7 standard feelings iniitated
     [["KEY", "confidence"],		["VAL", -0.8], ["CAT","VAR"], ["TYPE","INT"]],
-    [["KEY", "irritability"],	["VAL", 0.8], ["CAT","VAR"], ["TYPE","INT"]],
-    [["KEY", "satisfaction"],	["VAL", -0.8], ["CAT","VAR"], ["TYPE","INT"]],
-    [["KEY", "respect"],		["VAL", -0.8], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "irritability"],	["VAL", -1], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "satisfaction"],	["VAL", -1], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "respect"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
     [["KEY", "force"],			["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
     [["KEY", "excitement"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
     // PREFS
@@ -151,54 +162,68 @@ var gourmandiseTopic = [
     [["KEY", "intention"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printIntentionList]],
 ];
 
-
- 
-
-
-// ======================  TOPIC ELSI  ======================
-var daisieTopic = [
-	// INFO
-	[["KEY", "_class"],						["VAL", "bot"], ["BOT","daisieBot"]],
-	[["KEY", "_reference"],					["VAL", ["d","daisie","flower"]]],
-	[["KEY", "_htmlprefix"],				["VAL", "daisie"]], //prefix of HTML elements  
-	[["KEY", "_read"],						["VAL", ["daisieTopic","userTopic"]]],
-	[["KEY", "_write"],						["VAL", []]],
-	[["KEY", "_exec"],						["VAL", ["userTopic","counterTopic"]]],
-	[["KEY", "type"],						["VAL", ["vegetal","flower"]]],
-	[["KEY", "name"],						["VAL", "Daisie"],
-											["WHY","My gardener gave it to me"]
-											],
-	[["KEY", "age"],						["VAL", 1],["TYPE","INT"],
-											["ONASK","I am one year old"], ["WHY","I was born one years ago"]
-											],
-	[["KEY", "gender"],						["VAL", "female"],
-											["ONASK", function(s) { return ((s == "male") ? "I am proud to be a male!" : "Just a female") }]
-											],
-	[["KEY", ["job"]],			          	["VAL", "I am a basic component of a bouquet"]],
-	[["KEY", ["home","location"]],		    ["VAL", "I live in Paris"]],
-	[["KEY", "usage"],						["VAL", "_UN_, I can do mothing"]],
-	[["KEY", "date"],						["VAL", "To ask for a date with me type: suggest meeting"],
-											["WHY","Because asking is about information not action"]
-											],
-	// REL
-	[["KEY", "relative"],					["VAL", ["pal"]],
-											["ONASK", BOT_printRelativeList],
-											], 
-	[["KEY", "pal"],					["VAL", "fifiTopic"],["CAT","REL"]],
-	// FEELINGS
-	[["KEY", "happiness"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]], // 7 standard feelings
-	[["KEY", "confidence"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
-	[["KEY", "irritability"],	["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
-	[["KEY", "satisfaction"],	["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
-	[["KEY", "respect"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
-	[["KEY", "force"],			["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
-	[["KEY", "excitement"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
-	// FUNC
-	[["KEY", "action"],						["VAL", ["meeting"]]],
-	[["KEY", "meeting"],					["VAL", ""], ["CAT","ACT"],
-											["EFFECT","fix a meeting with me"]
-											]
+var jalousieTopic = [
+    [["KEY", "_class"],						["VAL", "bot"], ["BOT","jalousieBot"]],
+    [["KEY", "_reference"],					["VAL", ["j","jalousie"]]],
+    [["KEY", "_htmlprefix"],				["VAL", "jalousie"]], //prefix of HTML elements
+    [["KEY", "_read"],						["VAL", ["userTopic","colereTopic", "gourmandiseTopic", "counterTopic"]]],
+    [["KEY", "_write"],						["VAL", ["userTopic","counterTopic"]]],
+    [["KEY", "_exec"],						["VAL", ["userTopic","counterTopic"]]],
+    [["KEY", "nom"],						["VAL", "Jalousie"],
+        ["ONASK", "Je/Nous sommes Jalousssie"],
+        ["WHY","Je t'ai déjà dit que tu m'appartient...."]
+    ],
+    [["KEY", "age"],						["VAL", 42], ["TYPE","INT"],
+        ["ONASK", "On ne demande pas ssson âge à une dame."]],
+    // FEELINGS
+    [["KEY", "happiness"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]], // 7 standard feelings iniitated
+    [["KEY", "confidence"],		["VAL", 0.5], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "irritability"],	["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "satisfaction"],	["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "respect"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "force"],			["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "excitement"],		["VAL", 0.5], ["CAT","VAR"], ["TYPE","INT"]],
+    // RELATIONS
+    [["KEY", "gourmandise"],			["VAL", "gourmandiseTopic"],["CAT","REL"]],
+    [["KEY", "colere"],			["VAL", "colereTopic"],["CAT","REL"]],
+    // PREFS
+    [["KEY", "preference"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printPreferenceList]],
+    [["KEY", "distaste"],		["VAL", []],  ["CAT","VAR"],["ONASK",BOT_printDistasteList]],
+    [["KEY", "suggestion"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printSuggestionList]],
+    [["KEY", "intention"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printIntentionList]],
 ];
+
+var colereTopic = [
+    [["KEY", "_class"],						["VAL", "bot"], ["BOT","colereBot"]],
+    [["KEY", "_reference"],					["VAL", ["c","colere"]]],
+    [["KEY", "_htmlprefix"],				["VAL", "colere"]], //prefix of HTML elements
+    [["KEY", "_read"],						["VAL", ["userTopic","jalousieTopic", "gourmandiseTopic", "counterTopic"]]],
+    [["KEY", "_write"],						["VAL", ["userTopic","counterTopic"]]],
+    [["KEY", "_exec"],						["VAL", ["userTopic","counterTopic"]]],
+    [["KEY", "nom"],						["VAL", "Colère"],
+        ["ONASK", "Colère , ça ce voit non ?!"],
+        ["WHY","C'est comme ça !"]
+    ],
+    [["KEY", "age"],						["VAL", 42], ["TYPE","INT"],
+        ["ONASK", "Qu'est ce que ça te fait mon âge !"]],
+    // RELATIONS
+    [["KEY", "gourmandise"],			["VAL", "gourmandiseTopic"],["CAT","REL"]],
+    [["KEY", "jalousie"],			["VAL", "jalousieTopic"],["CAT","REL"]],
+    // FEELINGS
+    [["KEY", "happiness"],		["VAL", -1], ["CAT","VAR"], ["TYPE","INT"]], // 7 standard feelings iniitated
+    [["KEY", "confidence"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "irritability"],	["VAL", 1], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "satisfaction"],	["VAL", -1], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "respect"],		["VAL", -0.5], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "force"],			["VAL", 1], ["CAT","VAR"], ["TYPE","INT"]],
+    [["KEY", "excitement"],		["VAL", 0], ["CAT","VAR"], ["TYPE","INT"]],
+    // PREFS
+    [["KEY", "preference"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printPreferenceList]],
+    [["KEY", "distaste"],		["VAL", []],  ["CAT","VAR"],["ONASK",BOT_printDistasteList]],
+    [["KEY", "suggestion"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printSuggestionList]],
+    [["KEY", "intention"],		["VAL", []], ["CAT","VAR"], ["ONASK",BOT_printIntentionList]],
+];
+
 
 
 // =======================  TOPIC USER  ========================
@@ -304,8 +329,9 @@ var counterTopic = [
 
 // =========  Initialization of bots and declaration of topics  ==========
 var fifiBot    = new BOT_makeBot("fifiBot","fifiTopic");
-var daisieBot  = new BOT_makeBot("daisieBot","daisieTopic");
 var gourmandiseBot  = new BOT_makeBot("gourmandiseBot","gourmandiseTopic");
+var jalousieBot  = new BOT_makeBot("jalousieBot","jalousieTopic");
+var colereBot  = new BOT_makeBot("colereBot","colereTopic");
 
 BOT_declareTopics(["userTopic","counterTopic"]);
 
@@ -418,10 +444,47 @@ function BOT_reqApplicationPostProcessing() {
 
 
 function BOT_onSwitchBot(oldbotid,newbotid) {
-	BOT_standardFrameBot(oldbotid, "hidden", "0px");
-	BOT_standardFrameBot(newbotid, "visible","4px solid yellow");
-}
+    var chatbox = document.getElementById("chatbox");
+    if(newbotid == "gourmandise"){
+        chatbox.value += "Un homme massif avec un corps de bébé et la tếte de votre patient apparait \n";
+    }
+    if(newbotid == "jalousie" && !knowJalousie){
+		chatbox.value += "Vous ne connessez personne de ce nom là.\n";
+		var chat = document.getElementById("litetalkchatbox");
+		chat.value = oldbotid;
+		BOT_chatboxOnSend('litetalkchatbox');
+		chat.value = "";
+		return;
+	}
+	if(newbotid == "colere" && !knowColere){
+		chatbox.value += "Vous ne connessez personne de ce nom là.\n";
+		var chat = document.getElementById("litetalkchatbox");
+		chat.value = oldbotid;
+		BOT_chatboxOnSend('litetalkchatbox');
+		chat.value = "";
+		return;
+	}
+    if(newbotid == "jalousie" && !visiteColereFirst){
+		chatbox.value += "Un serpent sort de derrière votre dos et vous sussure: 'Ssssalut...'\n";
+	}
+    if(newbotid == "jalousie" && visiteColereFirst){
+        chatbox.value += "Jalousie apparait en vous reniflant et vous dit:'Je connais cette odeur c'est celle de ma bouteille, et attend je reconnais aussi celle de Colère ! C'est donc lui qui m'a volé mes précieuse bouteille ! Tiens met ça te permettras de le calmer un peu. Vas lui dire de me rendre tout ce qu'il m'as pris !' \n";
+        visiteColereFirst = false;
+        canSpeakToColere = true;
+    }
 
+    if(newbotid == "colere" && !canSpeakToColere){
+        chatbox.value += "Un être enragée et géant vous lance plein de bouteille dès que vous approchez, vous préférez retournez voir " + oldbotid + ".\n";
+        visiteColereFirst = true;
+		var chat = document.getElementById("litetalkchatbox");
+		chat.value = oldbotid;
+		BOT_chatboxOnSend('litetalkchatbox');
+		chat.value = "";
+	}
+    if(newbotid == "colere" && canSpeakToColere){
+        chatbox.value += "Vous pouvez maintenant approchez Colère, en vous voyant il grogne : 'BONJOUR'. Vous faites un pas en arrière mais vous restez sur place.\n";
+    }
+}
 
 
 
