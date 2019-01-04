@@ -17,21 +17,33 @@ function sendMessage(botID) {
         name = "Jalousie" ;
         namemin = "jalousie";
     }
-    if(botID == "colereBot"){
+    if(botID == "colereBot") {
         ballon = "colereballoon";
-        name = "Colere" ;
+        name = "Colere";
         namemin = "colere";
     }
+    var chat = document.getElementById("litetalkchatbox");
+    var newval = chat.value.split(' ');
+    var oldval = chat.value;
+    chat.value = newval[0] + ' ' + newval.slice(1).join('');
+    var chatbox = document.getElementById("chatbox");
+    var oldvalchat = chatbox.value;
     BOT_chatboxOnSend('litetalkchatbox');
     var fifiballon = document.getElementById(ballon);
-    var chat = document.getElementById("litetalkchatbox");
-    var chatbox = document.getElementById("chatbox");
-    chatbox.value += "Tom > " + chat.value + "\n";
-    if(chat.value == "jalousie" || chat.value == "colere" || chat.value == "gourmandise"){
-        BOT_onSwitchBot(namemin, chat.value);
+    var change = oldvalchat == chatbox.value
+    if(change){
+        chatbox.value += "Tom > " + oldval + "\n";
+    }
+    if(chat.value.includes("jalousie") || chat.value.includes("colere") || chat.value.includes("gourmandise")){
+        onSwitchBot(namemin, chat.value);
+        chat.value = "";
+        chatbox.scrollTop = chatbox.scrollHeight;
         return;
     }
-    chatbox.value += name + " > " + fifiballon.value + "\n";
+    if(change) {
+        chat.value = "";
+        chatbox.value += name + " > " + fifiballon.value + "\n";
+    }
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
