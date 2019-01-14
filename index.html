@@ -9,7 +9,9 @@
     <title>Mania</title>
 </head>
 <body>
-<div id="game">
+<table>
+    <tr>
+        <td id="game">
     <pre>
 ##################################################################################################
 #      __    __     _                            _                                _              #
@@ -20,18 +22,32 @@
 #                                                                                                #
 ##################################################################################################
     </pre>
-    <p id="test"></p>
-    <textarea id="chatbox" readonly>Vous êtes un psychologue spécialisé en nouvelle technologie et aujourd'hui vous essayer un logiciel qui permet de soignez vos patient en rentrant dans leurs têtes, votre unique patient qui à bien voulue tester la machine est arrivé, bon courage pour le soigner...
+            <p id="test"></p>
+            <textarea id="chatbox" readonly>Vous êtes un psychologue spécialisé en nouvelle technologie et aujourd'hui vous essayer un logiciel qui permet de soignez vos patient en rentrant dans leurs têtes, votre unique patient qui à bien voulue tester la machine est arrivé, bon courage pour le soigner...
     </textarea>
-    <textarea id="gourmandiseballoon" hidden="True"></textarea>
-    <textarea id="colereballoon" hidden="True"></textarea>
-    <textarea id="jalousieballoon" hidden="True"></textarea>
-    <p id="form">
-        >
-        <input id="litetalkchatbox" type="text" size="55" value="ask nom"  onKeyPress="keyPressed(event);"/>
-        <input type="submit" name="sendButton" id="sendButton" value="SEND" onClick="sendMessage(BOT_theBotId, BOT_theBotId)"/>
-    </p>
-</div>
+            <textarea id="gourmandiseballoon" hidden="True"></textarea>
+            <textarea id="colereballoon" hidden="True"></textarea>
+            <textarea id="jalousieballoon" hidden="True"></textarea>
+            <p id="form">
+                >
+                <input id="litetalkchatbox" type="text" size="55" value="ask nom"  onKeyPress="keyPressed(event);"/>
+                <input type="submit" name="sendButton" id="sendButton" value="SEND" onClick="sendMessage(BOT_theBotId, BOT_theBotId)"/>
+            </p>
+        </td>
+        <td id="plop">
+            <u><b>Mémo:</b></u><br/>
+            ask "mot-clé"<br/>
+            why "mot-clé"<br/>
+            execute | faire "mot-clé"<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| avoir "mot-clé"<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| donner "mot-clé"<br/>
+            Pour changer de personnage<br/>
+            tapez le nom du personnage<br/>
+            à qui vous voulez parler.<br/>
+        </td>
+    </tr>
+
+</table>
 </body>
 
 <script type="text/javascript">

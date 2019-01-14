@@ -271,6 +271,9 @@ var jalousieTopic = [
 		return "Oui, j'ai ce qu'il faut, tiens voici une pillule spécial \n Vous avez obtenue 'Pillule ???'";
 	}]],
     [["KEY", "avoirspecialcake"], ["CAT", "ACT"], ["VAL", "get_cake"]],
+	[["KEY", "objectif"], ["ONASK", "Je veux pouvoir attirer et controler le monde !!!! "]],
+	[["KEY", "genre"], ["ONASK", "Je ssssuis une femme voyons. "]],
+	[["KEY", "bisexuel"], ["ONASK", "Oh oui, et pas que. "]],
 	[["KEY", "promesse"], ["ONASK", "Quoi il veut que je lui promette de faire ça, mais jamais de la vie comment pourrait je sublimer mon corps sans ça, et attirer les hommes et femmes sexy"],
 		["WHY", "Parce que je peux pas attirer les gens avec le corps que j'ai, il ressemble à rien donc je fais autrement !"]],
 	[["KEY", ["homme", "hommesexy", "femme", "femmesexy", "corp", "changer"]], ["ONASK", "Oui c'est un peu l'objectif de ce que je suis...Tu ne penses pas ? D'ailleur tu es un homme sexy toi Tom..."]],
@@ -325,6 +328,7 @@ function donnerPillsColere(){
 		print("", "Rechargez la page pour tenter une seconde fois...");
 		var form = document.getElementById("form");
 		form.hidden = true;
+		return;
 	}
 	print("", "Vous n'avez pas de pillule...")
 }
@@ -340,6 +344,7 @@ function donnerBouteilleGourmandise(){
 		print("", "Rechargez la page pour tenter une seconde fois...");
 		var form = document.getElementById("form");
 		form.hidden = true;
+		return;
 	}
 	print("", "Vous n'avez pas de bouteille...")
 }
@@ -360,6 +365,7 @@ var colereTopic = [
         ["ONASK", "Qu'est ce que ça te fait mon âge !"]],
 	[["KEY", "bouteille"], ["ONASK", "Quoi tu les veux, je te les passerai jamais et encore moins à jalousie, ces bouteilles attire tout le monde et qu'est ce que ça me met en rogne les gens ###, je veux bien faire une exeception si j'ai la prommesse de jalousie de ne pas utiliser ces bouteilles autant qu'elle le fait d'habitude."]],
 	[["KEY", "promesse"], ["ONASK", "Oui j'attends que Jalousie la fasse si elle veux ces bouteilles"]],
+	[["KEY", "gronder"], ["ONASK", "Gourmandise, oui il ne peux pas s'empecher de crier ou de pleurer."]],
 	[["KEY", "fairepromesse"], ["CAT", "ACT"], ["VAL", "fairePromesse"]],
 	[["KEY", "donnerpillule"], ["CAT", "ACT"], ["VAL", "donnerPillsColere"]],
     // RELATIONS
@@ -598,6 +604,7 @@ function BOT_reqApplicationPostProcessing() {
 	return;
 }
 
+var jalousieFirst = true;
 
 function onSwitchBot(oldbotid, newbotid) {
     var chatbox = document.getElementById("chatbox");
@@ -628,8 +635,13 @@ function onSwitchBot(oldbotid, newbotid) {
 		chat.value = "";
 		return;
 	}
-    if(newbotid.includes("jalousie") && !visiteColereFirst){
+
+	if(newbotid.includes("jalousie") && !visiteColereFirst && !jalousieFirst){
 		chatbox.value += "Un serpent sort de derrière votre dos et vous sussure: 'Ssssalut...'\n";
+	}
+	if(newbotid.includes("jalousie") && jalousieFirst){
+		chatbox.value += "Un serpent sort de derrière votre dos et vous sussure: 'Ssssalut, tu ne ssaurais pas ou ce trouve mes bouteilles par hazard ??? Non, bon tu viens alors pour mes 'médicaments''\n";
+		jalousieFirst = false;
 	}
     if(newbotid.includes("jalousie") && visiteColereFirst){
         chatbox.value += "Jalousie apparait en vous reniflant et vous dit:'Je connais cette odeur c'est celle de ma bouteille, et attend je reconnais aussi celle de Colère ! C'est donc lui qui m'a volé mes précieuse bouteille ! Tiens met ça et tu pourras lui parler. Vas lui dire de me rendre tout ce qu'il m'as pris !' \n";
@@ -638,7 +650,7 @@ function onSwitchBot(oldbotid, newbotid) {
     }
 
     if(newbotid.includes("colere") && !canSpeakToColere){
-        chatbox.value += "Un être enragée et géant vous lance plein de bouteille dès que vous approchez, vous préférez retournez voir " + oldbotid + ".\n";
+        chatbox.value += "Un être enragée et géant vous lance plein de bouteille dès que vous approchez, elles se cassent sur vous, vous préférez retournez voir " + oldbotid + ".\n";
         visiteColereFirst = true;
 		var chat = document.getElementById("litetalkchatbox");
 		chat.value = oldbotid;

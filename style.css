@@ -11,6 +11,17 @@ body{
     margin-left: 200px;
 }
 
+#plop{
+    border: 4px ridge darkgreen;
+    background-color: black;
+    color: green;
+    margin-left: 200px;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
 #sendButton{
     background-color: black;
     border-color: darkgreen;
