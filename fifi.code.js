@@ -124,7 +124,7 @@ function func_giveCakeGourmandise(){
 }
 
 function get_cake(){
-    print("Jalousie", "Tiens je te le donne, je ne vois pas ccce que tu peux en faire mais bon...");
+    print("Jalousie", "Tiens je / nous te le donnons, je ne vois pas ccce que tu peux en faire mais bon...");
     print("Tom", "Vous avez obtenu le special-cake.");
     gateau = true;
 }
@@ -202,7 +202,7 @@ var gourmandiseTopic = [
 ];
 
 function win(){
-	print("", "Vous sortez de Mania en ayant reussi à calmer le patient, et quand vous sortez vous voyez le patient vous attendre patiemment avec un sourire et un regard que vous reconnaissez imédiatemment : 'Il est temps de tenir votre promesssse', dit-il.");
+	print("", "Vous sortez de Mania en ayant reussi à calmer le patient. Quand vous sortez, vous voyez le patient vous attendre patiemment avec un sourire et un regard que vous reconnaissez immédiatement : 'Il est temps de tenir votre promesssse', dit-il.");
 	print("", "Bravo, vous avez trouvé la bonne fin ! Il y en a 3 autres à trouver, saurez-vous y parvenir ?");
 	print("", "Pour recommencer, rechargez la page...");
 	var form = document.getElementById("form");
@@ -217,7 +217,7 @@ function doEchange(){
 var jalousieEnd = false;
 function donnerBouteille(){
 	if(bouteille){
-		print("Jalousie", "Ahhh merccci... Je vais faire atttention avec ccces bouteilles maintenant, je t'attendrai quand tu ssseras pret...");
+		print("Jalousie", "Ahhh merccci... je / nous allons faire atttention avec ccces bouteilles maintenant, je t'attendrai quand tu ssseras pret...");
 		jalousieEnd = true;
 		if(gourmandiseEnd){
 			win();
@@ -252,20 +252,20 @@ var jalousieTopic = [
 		knowColere = true;
 		return "Oui, Colere par exemple, il est toujours à cran cccelui là, impossssible à gérer!";
 	}]],
-	[["KEY", "bouteille"], ["ONASK", "CCCe sont des bouteilles d'un contenu très ssspécial me permettant d'attirer les gens autour de moi."]],
+	[["KEY", "bouteille"], ["ONASK", "CCCe sont des bouteilles d'un contenu très ssspécial me /nous permettant d'attirer les gens autour de moi."]],
 	[["KEY", ["avoirmedicaments", "avoirmedicament"]], ["CAT", "ACT"], ["VAL", "avoirmedicaments"]],
     [["KEY", ["aphrodysiaque"]], ["ONASK", "Ah zut ! Je crois que j'ai déjà tout utilisé..."]],
     [["KEY", "psychotrope"], ["ONASK", "Oups... J'en ai plus..."]],
 	[["KEY", "age"],						["VAL", 42], ["TYPE","INT"],
         ["ONASK", "On ne demande pas ssson âge à une dame."]],
-    [["KEY", "gateau"], ["ONASK", "Oui, j'ai récupéré le gâteau, mais je ne le rendrai pas : il fait grossssir, et me/nous rend moins attractif"]],
-    [["KEY", "attractif"], ["ONASK", "Oui, c'est mon petit atout que je sssublime le plus possssible. D'ailleurs, sssi on parlait de toi, Tom..."],
+    [["KEY", "gateau"], ["ONASK", "Oui, j'ai récupéré le gâteau, mais je / nous ne le rendrons pas : il fait grossssir, et me/nous rend moins attractifs."]],
+    [["KEY", "attractif"], ["ONASK", "Oui, c'est mon petit atout que je / nous sssublimons le plus possssible. D'ailleurs, sssi on parlait de toi, Tom..."],
         ["WHY", "Pour attirer le plusss de gens possssible voyons..."]],
-    [["KEY", "grossir"], ["ONASK", "Tu sssais bien ce que c'est de grosssir regarde toi... Meme sssi tu ne manques pas de charme, il faut l'admettre..."],
-        ["WHY", "Oui ccce gateau contient 90% de crème, sssi ssseulement il mangeait mon 'special cake' !"]],
+    [["KEY", "grossir"], ["ONASK", "Tu sssais bien ce que c'est de grosssir regarde toi... Meme sssi tu ne manques pas de charme, il faut l'admettre... CCCe gateau contient 90% de crème, sssi ssseulement il mangeait mon 'special cake' !"],
+        ["WHY", "Oui c'est important de manger moins gras pour ne pas grossir."]],
     [["KEY", "specialcake"], ["ONASK", function (){
 		gateau = true;
-		return "Le meilleur gâteau qui sssoit, composé de ssseulement 2% de matière grasssse ! Tiens, je te le laisssse, j'en ai pas besoin.";
+		return "Le meilleur gâteau qui sssoit, composé de ssseulement 2% de matière grasssse ! Tiens, je te le laisssse, j'en ai pas besoin.\nVous obtenez l'objet 'special-cake'.";
 	}]],
 	[["KEY", "matieregrasse"], ["ONASK", "C'est ce que tu as dans ton ventre."]],
 	[["KEY", ["calmer", "calmergourmandise", "medicamentcalme", "calme", "calmant"]], ["ONASK", function (){
@@ -273,15 +273,15 @@ var jalousieTopic = [
 		return "Oui, j'ai ccce qu'il faut, tiens voiccci une pillule ssspéciale. \n Vous avez obtenu l'objet : 'Pillule ???'";
 	}]],
     [["KEY", "avoirspecialcake"], ["CAT", "ACT"], ["VAL", "get_cake"]],
-	[["KEY", "objectif"], ["ONASK", "Je veux pouvoir attirer et controler le monde !!!! "]],
+	[["KEY", "objectif"], ["ONASK", "Je veux pouvoir attirer et controler le monde ! "]],
 	[["KEY", "genre"], ["ONASK", "Je ssssuis une femme voyons. "]],
 	[["KEY", "bisexuel"], ["ONASK", "Oh oui, et pas que."]],
 	[["KEY", "promesse"], ["ONASK", "Quoi ?! Il veut que je lui promette de faire ççça ! Mais jamais de la vie, comment pourrais-je sssublimer mon corps sans ççça, et attirer les hommes et femmes sssexy ?"],
-		["WHY", "Parce que je ne peux pas attirer les gens avec le corps que j'ai, il ne ressssemble à rien donc je fais autrement !"]],
+		["WHY", "Parce que je / nous ne pouvons pas attirer les gens avec le corps que j'ai, il ne ressssemble à rien donc je fais autrement !"]],
 	[["KEY", ["homme", "hommesexy", "femme", "femmesexy", "corp", "changer", "sexy", "sublimer"]], ["ONASK", "Oui ccc'est un peu l'objectif de ccce que je sssuis... Tu ne penssses pas ? D'ailleurs, tu es un homme sssexy toi Tom..."]],
 //	[["KEY", "sexy"], ["ONASK", "C'est ce que ce fichu corps ne permet pas alors je fait des echanges avec les gens et les entube..."],
 //		["WHY", "Car c'est le seul moyen"]],
-	[["KEY", ["tom", "moi"]], ["ONASK", "Oui toi... On peut peut-être sss'arranger tous les deux, je t'échange la promesssse pour Colère contre Toi..."]],
+	[["KEY", ["tom", "moi"]], ["ONASK", "Oui toi... On peut peut-être sss'arranger tous les deux, je t'échange la promesssse pour Colère contre Toi... *(Elle se met à vous tourner autour)* Qu'en dis tu ? Veux-tu faire cccet échange ?"]],
 	[["KEY", ["deal", "echange", "faireechange"]], ["CAT","ACT"], ["VAL", "doEchange"]],
 	[["KEY", ["donnerbouteille"]], ["CAT","ACT"], ["VAL", "donnerBouteille"]],
     // FEELINGS
@@ -322,7 +322,7 @@ function fairePromesse(){
 function donnerPillsColere(){
 	if(havePills){
 		print("Colère", "Qu'est ce que ceci ? La fameuse promesse de Jalousie hein ? *Il avale la pillule et s'endort*");
-		print("Jalousie", "Maintenant que Colère dort je vais pouvoir prendre le controle !!! *Elle vous fait sortir du corps*");
+		print("Jalousie", "Maintenant que Colère dort je / nous allons pouvoir prendre le controle ! *Elle vous fait sortir du corps*");
 		print("", "En sortant du corps vous voyez votre patient debout, il vous remercie et s'en va.");
 		print("", "Quelque jours plus tard... Vous voyez que votre patient est monté à la tête d'un parti dictatorial.");
 		print("", "Quelque années plus tard... Vous mourez à cause du régime que votre patient à créé.");
@@ -619,7 +619,7 @@ function onSwitchBot(oldbotid, newbotid) {
     	return
 	}
     if(newbotid.includes("gourmandise")){
-        chatbox.value += "Un homme massif avec un corps de bébé et la tête de votre patient apparait \n";
+        chatbox.value += "Un homme massif avec un corps de bébé et la tête de votre patient apparait.\n";
     }
     if(newbotid.includes("jalousie") && !knowJalousie){
 		chatbox.value += "Vous ne connaissez personne de ce nom là.\n";
@@ -646,7 +646,7 @@ function onSwitchBot(oldbotid, newbotid) {
 		jalousieFirst = false;
 	}
     if(newbotid.includes("jalousie") && visiteColereFirst){
-        chatbox.value += "Jalousie apparait en vous reniflant et vous dit : 'Je connais cette odeur ! C'est celle de mes bouteilles, et... attends... je reconnais aussi celle de Colère ! C'est donc lui qui m'a volé mes précieuses bouteilles ! Tiens, mets ça et tu pourras lui parler. Vas lui dire de me rendre tout ce qu'il m'a pris !' \n";
+        chatbox.value += "Jalousie apparait en vous reniflant et vous dit : 'Je connais cccette odeur ! C'est cccelle de mes bouteilles, et... attends... je reconnais aussssi celle de Colère ! C'est donc lui qui m'a volé mes précieuses bouteilles ! Tiens, mets ççça et tu pourras lui parler. Vas lui dire de me /nous rendre tout ccce qu'il m'a pris !' \n";
         visiteColereFirst = false;
         canSpeakToColere = true;
     }
